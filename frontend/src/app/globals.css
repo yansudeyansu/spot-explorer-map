@@ -1,0 +1,148 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: 24 24 27;        /* zinc-900 — primary / active */
+  --line: 228 228 231;    /* zinc-200 — hairline borders */
+  --focus: 37 99 235;     /* blue-600 — focus ring only */
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans',
+    'Hiragino Kaku Gothic ProN', 'Noto Sans JP', 'Segoe UI', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color: rgb(var(--ink));
+}
+
+/* Visible, consistent keyboard focus across the whole app */
+:focus-visible {
+  outline: 2px solid rgb(var(--focus));
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+/* Don't double up rings on mouse click for elements we style ourselves */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Skip link — visible only when focused */
+.skip-link {
+  position: absolute;
+  left: 12px;
+  top: -48px;
+  z-index: 1000;
+  background: rgb(var(--ink));
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 12px;
+}
+
+/* ---- Leaflet ---- */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  background: #f1f1ee;
+  font-family: inherit;
+}
+.leaflet-control-zoom {
+  border: 1px solid rgb(var(--line)) !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06) !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+.leaflet-control-zoom a {
+  border: none !important;
+  color: rgb(var(--ink)) !important;
+  font-weight: 500;
+}
+.leaflet-bar a:hover {
+  background: #f4f4f5 !important;
+}
+.leaflet-popup-content-wrapper {
+  border-radius: 10px !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12) !important;
+}
+.leaflet-popup-content {
+  margin: 10px 12px !important;
+}
+
+@media (max-width: 640px) {
+  .leaflet-control-attribution {
+    font-size: 9px;
+  }
+}
+
+/* ---- Range slider (monochrome) ---- */
+input[type='range'].brand-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    rgb(var(--ink)) 0%,
+    rgb(var(--ink)) var(--pct, 50%),
+    #e4e4e7 var(--pct, 50%),
+    #e4e4e7 100%
+  );
+}
+input[type='range'].brand-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: #fff;
+  border: 2px solid rgb(var(--ink));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+input[type='range'].brand-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+}
+input[type='range'].brand-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: #fff;
+  border: 2px solid rgb(var(--ink));
+  cursor: pointer;
+}
+
+/* ---- Scrollbar ---- */
+.nice-scroll::-webkit-scrollbar {
+  width: 10px;
+}
+.nice-scroll::-webkit-scrollbar-thumb {
+  background: #d4d4d8;
+  border-radius: 9999px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+.nice-scroll::-webkit-scrollbar-thumb:hover {
+  background: #a1a1aa;
+  background-clip: padding-box;
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
